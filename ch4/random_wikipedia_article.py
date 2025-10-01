@@ -1,0 +1,34 @@
+import httpx
+import sys
+from rich.console import Console
+
+if sys.version_info >= (3, 8):
+    from importlib.metadata import metadata
+else:
+    from importlib_metadata import metadata
+
+API_URL = "https://en.wikipedia.org/api/rest_v1/page/random/summary"
+
+USER_AGENT = "{Name}/{Version} (Contact: {Author-email})"
+
+
+def build_user_agent():
+    fields = metadata("random-wikipedia-article")
+    return USER_AGENT.format_map(fields)
+
+
+def main():
+    headers = {"User-Agent": build_user_agent()}
+
+    with httpx.Client(headers=headers, http2=True) as client:
+        response = client.get(API_URL, follow_redirects=True)
+        response.raise_for_status()
+        data = response.json()
+
+    console = Console(width=72, highlight=False)
+    console.print(data["title"], style="bold", end="\n\n")
+    console.print(data["extract"])
+
+
+if __name__ == "__main__":
+    main()
