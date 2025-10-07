@@ -50,9 +50,9 @@ if h2 is not None:
 # 然后在使用的时候检查版本，根据版本使用标准库的importlib.metadata或importlib_metadata
 import sys
 if sys.version_info >= (3, 8):
-    from importlib.metadata import metadata
+    from importlib.metadata import metadata # noqa: F401
 else:
-    from importlib_metadata import metadata
+    from importlib_metadata import metadata # noqa: F401
 
 # env marker支持的相等和比较操作符和版本声明支持的一致，还可以使用in或not in来匹配是否包含某个子字符串
 # 还可以把多个env marker结合起来使用，下面是例子：

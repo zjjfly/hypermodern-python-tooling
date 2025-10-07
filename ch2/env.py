@@ -1,4 +1,9 @@
+import importlib.metadata
+import importlib.util
+import pprint
 import sys
+
+import httpx
 
 # Python环境包括解释器，标准库以及安装的第三方库
 
@@ -11,12 +16,7 @@ print(f"environment location: {sys.prefix}")
 print(f"lists of directories to search for modules : {sys.path}")
 print(f"built-in modules: {sys.builtin_module_names}")
 
-package_files = (
-            str(j)
-            for i in range(0,10)
-            if i > 2
-            for j in range(0,i) or []
-        )
+package_files = (str(j) for i in range(0, 10) if i > 2 for j in range(0, i) or [])
 
 print(list(package_files))
 
@@ -39,16 +39,14 @@ print(f"built-in modules: {sys.builtin_module_names}")
 # 解释器会把纯Python模块编译为字节码，当第一次加载它们的时候。字节码会被存放在以.pyc结尾的文件中，这些文件位于每个包的__pycache__中
 
 # 使用importlib可以获取模块的ModuleSpec，其中的字段origin存放了其源文件或dynamic library的位置，或者固定的字符串'built-in'或'frozen'
-import importlib.util
 
-print(f"stdlib modules:")
+print("stdlib modules:")
 for name in sorted(sys.stdlib_module_names):
     if spec := importlib.util.find_spec(name):
         print(f"{name:20} {spec.origin}")
-# importlib还可以获取环境中安装的第三方包的元数据，如作者，license，版本等
-import importlib.metadata
 
-print(f"Installed packages:")
+# importlib还可以获取环境中安装的第三方包的元数据，如作者，license，版本等
+print("Installed packages:")
 distributions = importlib.metadata.distributions()
 for distribution in sorted(distributions, key=lambda d: d.name):
     print(f"{distribution.name:30} {distribution.version}")
@@ -74,7 +72,6 @@ for distribution in sorted(distributions, key=lambda d: d.name):
 # 把import系统放在标准库中可以让我们自定义导入机制，只要你实现自定义的MetaPathFinder，并注册到sys.path_hooks
 
 # 导入模块的函数的返回是一个types.ModuleType对象，任何模块中的全局变量都会变成这个对象的属性，所以可以使用module.var来访问
-import pprint
 pprint.pprint(sys.__dict__)
 # 底层的原理是：模块的属性存放在其的__dict__中，在导入模块的时候，会执行模块的代码并把__dict__作为全局命名空间，这样代码中定义的全局变量就会被放在__dict__中。
 # exec(code,module.__dict__)
@@ -85,7 +82,6 @@ print(f"Full qualified name: {sys.__name__}")
 print(f"Spec: {sys.__spec__}")
 # package还有一个属性__path__，它的值是一个list，存放了用于查找子模块的位置。
 # 一般情况下它只包含一个元素：存放__init__.py的文件的目录。如果是命名空间包，则会有多个
-import httpx
 print(f"Path: {httpx.__path__}")
 
 # 模块在第一次被导入之后，会被存放到sys.modules中，可以看作是对已导入模块的缓存，key是模块的全限定名。
