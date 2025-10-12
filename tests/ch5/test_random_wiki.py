@@ -9,6 +9,7 @@ from ch6.random_wikipedia_article import Article, show, fetch
 # pytest会自动识别测试方法，即以test开头的python源文件中的test开头的方法
 # 它还会重写其中的assert，让assert失败的时候输出的信息更多
 
+
 # 使用fixture来向测试方法传入参数
 @pytest.fixture
 def file():
@@ -21,7 +22,7 @@ articles = [
     Article("Lorem Ipsum", "Lorem ipsum dolor sit amet."),
     Article(
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-        "Nulla mattis volutpat sapien, at dapibus ipsum accumsan eu."
+        "Nulla mattis volutpat sapien, at dapibus ipsum accumsan eu.",
     ),
 ]
 
@@ -54,7 +55,7 @@ article3 = parametrized_fixture(
     Article("Lorem Ipsum", "Lorem ipsum dolor sit amet."),
     Article(
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-        "Nulla mattis volutpat sapien, at dapibus ipsum accumsan eu."
+        "Nulla mattis volutpat sapien, at dapibus ipsum accumsan eu.",
     ),
 )
 

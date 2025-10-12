@@ -58,9 +58,9 @@ run("myscript.py")
 # tool.ruff.lint.ignore可以不跳过某些规则，语法和select一致，它在需要某个插件的绝大部分规则，但想要跳过某几个的时候特别有用
 # tool.ruff.lint.per-file-ignores可以配置某个文件或文件夹中的文件需要跳过的规则
 # 但跳过某些规则应该作为最后的手段，更好的方法是使用下面这样的注释，这样既可以暂时对该行代码停用某些规则，又可以标记有问题的代码方便后续的修改
-a=1
-if not a is None: # noqa: E714
+a = 1
+if not a is None:  # noqa: E714
     print("No arguments given")
+
 # 可以使用ruff check --add-noqa来自动给有问题的代码添加noqa注释，但一般需要先在select中配置几个具体的规则来限定范围
 # 还可以使用规则RUF100这个规则来自动删除已经不再需要的noqa注释
-

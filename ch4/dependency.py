@@ -49,10 +49,11 @@ if h2 is not None:
 # "importlib-metadata>=6.7.0; python_version < '3.8'"
 # 然后在使用的时候检查版本，根据版本使用标准库的importlib.metadata或importlib_metadata
 import sys
+
 if sys.version_info >= (3, 8):
-    from importlib.metadata import metadata # noqa: F401
+    from importlib.metadata import metadata  # noqa: F401
 else:
-    from importlib_metadata import metadata # noqa: F401
+    from importlib_metadata import metadata  # noqa: F401
 
 # env marker支持的相等和比较操作符和版本声明支持的一致，还可以使用in或not in来匹配是否包含某个子字符串
 # 还可以把多个env marker结合起来使用，下面是例子：
@@ -106,4 +107,3 @@ else:
 
 # 在生产环境运行的应用最好是一周检查一次依赖更新，处于活跃开发期的甚至可以每天都检查，可以使用Dependabot或Renovate这样的工具
 # 如果不这么做，一个安全问题可能就会让你升级多个依赖的主版本，也可能包括Python的版本
-

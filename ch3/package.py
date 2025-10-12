@@ -10,7 +10,8 @@
 
 # 下面是模拟后端进行build的代码
 import hatchling.build as backend
-requires=backend.get_requires_for_build_wheel()
+
+requires = backend.get_requires_for_build_wheel()
 print(f"requires: {requires}")
 backend.build_wheel("dist")
 

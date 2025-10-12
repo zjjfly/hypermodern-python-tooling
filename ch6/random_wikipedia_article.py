@@ -14,8 +14,8 @@ USER_AGENT = "RandomWiki/1.0 (Contact: zjjblue@gmail.com)"
 
 @dataclass
 class Article:
-    title: str = ''
-    summary: str = ''
+    title: str = ""
+    summary: str = ""
 
 
 def fetch(url):
@@ -40,6 +40,7 @@ def show(article: Article, file: Optional[IO[str]]):
     console.print(article.title, style="bold")
     if article.summary:
         console.print(f"\n{article.summary}")
+
 
 def main():
     article = fetch(API_URL)
