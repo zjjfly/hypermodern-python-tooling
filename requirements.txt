@@ -2,6 +2,8 @@
 #    uv pip compile pyproject.toml -o requirements.txt
 anyio==4.10.0
     # via httpx
+attrs==25.4.0
+    # via hypermodern-python-tooling (pyproject.toml)
 beautifulsoup4==4.13.5
     # via bs4
 bs4==0.0.2
