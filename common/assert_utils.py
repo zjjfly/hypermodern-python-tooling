@@ -1,7 +1,10 @@
 import traceback
+from typing import Callable, Type
 
 
-def assert_throw(exception_class, callable_):
+def assert_throw[T: Exception](
+    exception_class: Type[T], callable_: Callable[[], None]
+) -> None:
     if callable(callable_):
         err = None
         try:
